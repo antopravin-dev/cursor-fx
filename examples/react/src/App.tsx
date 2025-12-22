@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { CursorFX } from 'cursor-fx/react';
-import type { CursorEffectType } from 'cursor-fx/react';
+import { CursorFX } from '../../../dist/react/index.mjs';
+import type { CursorEffectType } from '../../../dist/react/index.mjs';
 
 function App() {
   const [enabled, setEnabled] = useState(true);
@@ -32,6 +32,13 @@ function App() {
                 '#32CD32',
                 '#FF1493',
                 '#00BFFF',
+              ]
+            : effect === 'retroCRT'
+            ? [
+                '#00FF00',
+                '#33FF33',
+                '#00CC00',
+                '#00DD00',
               ]
             : [
                 '#FFD700',
@@ -76,6 +83,14 @@ function App() {
             }}
           >
             🎉 Confetti
+          </button>
+          <button
+            onClick={() => setEffect('retroCRT')}
+            style={{
+              backgroundColor: effect === 'retroCRT' ? '#4CAF50' : undefined
+            }}
+          >
+            🖥️ Retro CRT
           </button>
         </div>
 

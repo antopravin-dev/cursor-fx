@@ -115,6 +115,7 @@
       <button id="fairyDustBtn">✨ Fairy Dust</button>
       <button id="sparkleBtn">⭐ Sparkle</button>
       <button id="confettiBtn">🎉 Confetti</button>
+      <button id="retroCRTBtn">🖥️ Retro CRT</button>
     </div>
 
     <div class="info">
@@ -166,6 +167,13 @@
               '#FF1493',
               '#00BFFF',
             ]
+            : effectType === 'retroCRT'
+            ? [
+              '#00FF00',
+              '#33FF33',
+              '#00CC00',
+              '#00DD00',
+            ]
             : [
               '#FFD700',
               '#FFC700',
@@ -182,6 +190,8 @@
         effectType === 'sparkle' ? '#4CAF50' : '';
       document.getElementById('confettiBtn').style.backgroundColor =
         effectType === 'confetti' ? '#4CAF50' : '';
+      document.getElementById('retroCRTBtn').style.backgroundColor =
+        effectType === 'retroCRT' ? '#4CAF50' : '';
     }
 
     // Initialize with fairy dust
@@ -211,6 +221,10 @@
 
     document.getElementById('confettiBtn').addEventListener('click', () => {
       startEffect('confetti');
+    });
+
+    document.getElementById('retroCRTBtn').addEventListener('click', () => {
+      startEffect('retroCRT');
     });
   </script>
 </body>

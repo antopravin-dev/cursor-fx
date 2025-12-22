@@ -1,6 +1,6 @@
-import { CursorFXEngine, createFairyDustEffect, createSparkleEffect, createConfettiEffect } from '../core';
+import { CursorFXEngine, createFairyDustEffect, createSparkleEffect, createConfettiEffect, createRetroCRTEffect } from '../core';
 
-export type CursorEffectType = 'fairyDust' | 'sparkle' | 'confetti';
+export type CursorEffectType = 'fairyDust' | 'sparkle' | 'confetti' | 'retroCRT';
 
 export interface InitCursorFXOptions {
   effect?: CursorEffectType;
@@ -62,6 +62,8 @@ export function initCursorFX(options: InitCursorFXOptions = {}): CursorFXInstanc
       ? createConfettiEffect(optimizedOptions)
       : effect === 'sparkle'
       ? createSparkleEffect(optimizedOptions)
+      : effect === 'retroCRT'
+      ? createRetroCRTEffect(optimizedOptions)
       : createFairyDustEffect(optimizedOptions);
 
   // Start the engine with the effect

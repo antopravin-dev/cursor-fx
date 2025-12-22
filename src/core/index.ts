@@ -5,3 +5,4 @@ export * from './utils';
 export * from './effects/fairyDust';
 export * from './effects/sparkle';
 export * from './effects/confetti';
+export * from './effects/retroCRT';

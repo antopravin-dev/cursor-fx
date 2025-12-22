@@ -40,6 +40,21 @@ function App() {
                 '#00CC00',
                 '#00DD00',
               ]
+            : effect === 'snow'
+            ? [
+                '#FFFFFF',
+                '#F0F8FF',
+                '#E6F3FF',
+                '#F5F5F5',
+              ]
+            : effect === 'bubble'
+            ? [
+                '#ADD8E6',
+                '#87CEEB',
+                '#B0E0E6',
+                '#AFEEEE',
+                '#E0FFFF',
+              ]
             : [
                 '#FFD700',
                 '#FFC700',
@@ -91,6 +106,22 @@ function App() {
             }}
           >
             🖥️ Retro CRT
+          </button>
+          <button
+            onClick={() => setEffect('snow')}
+            style={{
+              backgroundColor: effect === 'snow' ? '#4CAF50' : undefined
+            }}
+          >
+            ❄️ Snow
+          </button>
+          <button
+            onClick={() => setEffect('bubble')}
+            style={{
+              backgroundColor: effect === 'bubble' ? '#4CAF50' : undefined
+            }}
+          >
+            🫧 Bubble
           </button>
         </div>
 

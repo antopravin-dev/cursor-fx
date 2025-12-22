@@ -1,7 +1,7 @@
 import { useEffect, useRef, useMemo } from 'react';
-import { CursorFXEngine, createFairyDustEffect, createSparkleEffect, createConfettiEffect, createRetroCRTEffect } from '../core';
+import { CursorFXEngine, createFairyDustEffect, createSparkleEffect, createConfettiEffect, createRetroCRTEffect, createSnowEffect, createBubbleEffect } from '../core';
 
-export type CursorEffectType = 'fairyDust' | 'sparkle' | 'confetti' | 'retroCRT';
+export type CursorEffectType = 'fairyDust' | 'sparkle' | 'confetti' | 'retroCRT' | 'snow' | 'bubble';
 
 export interface UseCursorFXOptions {
   effect?: CursorEffectType;
@@ -80,6 +80,10 @@ export function useCursorFX(options: UseCursorFXOptions = {}) {
         ? createSparkleEffect(optimizedOptions)
         : effect === 'retroCRT'
         ? createRetroCRTEffect(optimizedOptions)
+        : effect === 'snow'
+        ? createSnowEffect(optimizedOptions)
+        : effect === 'bubble'
+        ? createBubbleEffect(optimizedOptions)
         : createFairyDustEffect(optimizedOptions);
 
     // Start the effect

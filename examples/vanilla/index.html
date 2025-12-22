@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cursor FX - Vanilla JS Example</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      z-index: 1;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, #fff, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    p {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .controls {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+
+    button {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      border: 2px solid white;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+      backdrop-filter: blur(10px);
+    }
+
+    button:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    .info {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      max-width: 600px;
+    }
+
+    .info h2 {
+      margin-bottom: 1rem;
+    }
+
+    .info ul {
+      list-style: none;
+      text-align: left;
+    }
+
+    .info li {
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    .info li::before {
+      content: "(";
+      position: absolute;
+      left: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>( Cursor FX</h1>
+    <p>Move your mouse to see the magic!</p>
+
+    <div class="controls">
+      <button id="stopBtn">Stop Effect</button>
+      <button id="startBtn">Start Effect</button>
+    </div>
+
+    <div class="controls">
+      <button id="fairyDustBtn">✨ Fairy Dust</button>
+      <button id="sparkleBtn">⭐ Sparkle</button>
+      <button id="confettiBtn">🎉 Confetti</button>
+    </div>
+
+    <div class="info">
+      <h2>Features</h2>
+      <ul>
+        <li>Beautiful particle effects</li>
+        <li>Smooth animations</li>
+        <li>Customizable colors</li>
+        <li>Zero dependencies</li>
+        <li>TypeScript support</li>
+      </ul>
+    </div>
+  </div>
+
+  <script type="module">
+    // Import from the built dist folder
+    import { initCursorFX } from '../../dist/vanilla/index.mjs';
+
+    let currentFx = null;
+    let currentEffect = 'fairyDust';
+
+    function startEffect(effectType) {
+      if (currentFx) {
+        currentFx.destroy();
+      }
+
+      currentEffect = effectType;
+
+      currentFx = initCursorFX({
+        effect: effectType,
+        particleCount: 5, // Reduced for performance
+        particleSize: 3,
+        colors: effectType === 'confetti'
+          ? [
+            '#FF6B6B',
+            '#4ECDC4',
+            '#FFE66D',
+            '#95E1D3',
+            '#F38181',
+          ]
+          : effectType === 'sparkle'
+            ? [
+              '#FFD700',
+              '#FF69B4',
+              '#00CED1',
+              '#FF6347',
+              '#9370DB',
+              '#32CD32',
+              '#FF1493',
+              '#00BFFF',
+            ]
+            : [
+              '#FFD700',
+              '#FFC700',
+              '#FFB700',
+              '#FFED4E',
+              '#F4E04D',
+            ]
+      });
+
+      // Update button styles
+      document.getElementById('fairyDustBtn').style.backgroundColor =
+        effectType === 'fairyDust' ? '#4CAF50' : '';
+      document.getElementById('sparkleBtn').style.backgroundColor =
+        effectType === 'sparkle' ? '#4CAF50' : '';
+      document.getElementById('confettiBtn').style.backgroundColor =
+        effectType === 'confetti' ? '#4CAF50' : '';
+    }
+
+    // Initialize with fairy dust
+    startEffect('fairyDust');
+
+    // Control buttons
+    document.getElementById('stopBtn').addEventListener('click', () => {
+      if (currentFx) {
+        currentFx.destroy();
+        currentFx = null;
+      }
+    });
+
+    document.getElementById('startBtn').addEventListener('click', () => {
+      if (!currentFx) {
+        startEffect(currentEffect);
+      }
+    });
+
+    document.getElementById('fairyDustBtn').addEventListener('click', () => {
+      startEffect('fairyDust');
+    });
+
+    document.getElementById('sparkleBtn').addEventListener('click', () => {
+      startEffect('sparkle');
+    });
+
+    document.getElementById('confettiBtn').addEventListener('click', () => {
+      startEffect('confetti');
+    });
+  </script>
+</body>
+
+</html>

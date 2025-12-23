@@ -140,10 +140,14 @@
     let currentFx = null;
     let currentEffect = 'fairyDust';
 
-    // Preload bubble images (relative to the HTML file)
+    // Preload bubble and snowflake images (relative to the HTML file)
     ImageLoader.loadBubbles('./bubbles')
       .then(() => console.log('Bubble images loaded successfully'))
       .catch(err => console.warn('Failed to load bubble images:', err));
+
+    ImageLoader.loadSnowflakes('./snowflakes')
+      .then(() => console.log('Snowflake images loaded successfully'))
+      .catch(err => console.warn('Failed to load snowflake images:', err));
 
     function startEffect(effectType) {
       if (currentFx) {

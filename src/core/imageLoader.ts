@@ -48,10 +48,34 @@ export class ImageLoader {
     }
   }
 
+  static async loadSnowflakes(basePath: string = '/snowflakes'): Promise<HTMLImageElement[]> {
+    const snowflakePaths = [
+      `${basePath}/snow_flake_1.png`,
+      `${basePath}/snow_flake_2.png`,
+    ];
+
+    try {
+      return await Promise.all(snowflakePaths.map(path => this.loadImage(path)));
+    } catch (error) {
+      console.warn('Failed to load some snowflake images, falling back to canvas rendering', error);
+      return [];
+    }
+  }
+
   static getRandomBubble(): HTMLImageElement | null {
-    const images = Array.from(this.images.values());
-    if (images.length === 0) return null;
-    return images[Math.floor(Math.random() * images.length)];
+    const bubbleImages = Array.from(this.images.entries())
+      .filter(([key]) => key.includes('bubble'))
+      .map(([, img]) => img);
+    if (bubbleImages.length === 0) return null;
+    return bubbleImages[Math.floor(Math.random() * bubbleImages.length)];
+  }
+
+  static getRandomSnowflake(): HTMLImageElement | null {
+    const snowflakeImages = Array.from(this.images.entries())
+      .filter(([key]) => key.includes('snow'))
+      .map(([, img]) => img);
+    if (snowflakeImages.length === 0) return null;
+    return snowflakeImages[Math.floor(Math.random() * snowflakeImages.length)];
   }
 
   static isLoaded(): boolean {

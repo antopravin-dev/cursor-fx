@@ -9,11 +9,15 @@ function App() {
   const [enabled, setEnabled] = useState(true);
   const [effect, setEffect] = useState<CursorEffectType>('fairyDust');
 
-  // Preload bubble images on mount
+  // Preload bubble and snowflake images on mount
   useEffect(() => {
     ImageLoader.loadBubbles('/bubbles')
       .then(() => console.log('Bubble images loaded successfully'))
       .catch(err => console.warn('Failed to load bubble images:', err));
+
+    ImageLoader.loadSnowflakes('/snowflakes')
+      .then(() => console.log('Snowflake images loaded successfully'))
+      .catch(err => console.warn('Failed to load snowflake images:', err));
   }, []);
 
   return (

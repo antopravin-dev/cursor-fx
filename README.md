@@ -6,7 +6,7 @@ Beautiful, customizable cursor particle effects for React and vanilla JavaScript
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 
-**[🎮 Live Demo](https://antopravin-dev.github.io/cursor-fx)** | **[📖 Documentation](#-api-reference)** | **[⭐ GitHub](https://github.com/antopravin-dev/cursor-fx)**
+**[🎮 Live Demo](https://www.antoprav.in/work/cursor-fx)** | **[📖 Documentation](#-api-reference)** | **[⭐ GitHub](https://github.com/antopravin-dev/cursor-fx)**
 
 ## ✨ Features
 

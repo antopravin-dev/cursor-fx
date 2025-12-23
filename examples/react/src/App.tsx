@@ -1,9 +1,6 @@
 import { useState, useEffect } from 'react';
-import { CursorFX } from '../../../dist/react/index.mjs';
+import { CursorFX, ImageLoader } from '../../../dist/react/index.mjs';
 import type { CursorEffectType } from '../../../dist/react/index.mjs';
-
-// Import ImageLoader from core build
-import { ImageLoader } from '../../../dist/core/index.mjs';
 
 function App() {
   const [enabled, setEnabled] = useState(true);

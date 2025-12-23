@@ -6,7 +6,7 @@ Beautiful, customizable cursor particle effects for React and vanilla JavaScript
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 
-**[🎮 Live Demo](https://antopravin-dev.github.io/cursor-fx)** | **[📖 Documentation](#-api-reference)** | **[⭐ GitHub](https://github.com/antopravin-dev/cursor-fx)**
+**[🎮 Live Demo](https://www.antoprav.in/work/cursor-fx)** | **[📖 Documentation](#-api-reference)** | **[⭐ GitHub](https://github.com/antopravin-dev/cursor-fx)**
 
 ## ✨ Features
 
@@ -306,24 +306,119 @@ engine.destroy();
 
 ## 🖼️ Using Image Assets
 
-Some effects support PNG assets for photorealistic quality:
+The **Bubble** and **Snow** effects support PNG images for photorealistic quality. If images aren't loaded, they automatically fall back to canvas-drawn shapes.
+
+### Setting Up Image Assets
+
+**1. Copy the images to your public directory:**
+
+The package includes high-quality PNG assets. Copy them from `node_modules/cursor-fx/dist/bubbles/` and `node_modules/cursor-fx/dist/snowflakes/` to your project's public directory:
+
+```bash
+# Example structure
+public/
+  bubbles/
+    soap_bubbles_1.png
+    soap_bubble_2.png
+    soap_bubble_3.png
+  snowflakes/
+    snow_flake_1.png
+    snow_flake_2.png
+```
+
+**2. Preload images before using the effects:**
+
+### React Example
+
+```tsx
+import { useEffect } from 'react';
+import { CursorFX, ImageLoader } from 'cursor-fx/react';
+
+function App() {
+  // Preload images on mount
+  useEffect(() => {
+    ImageLoader.loadBubbles('/bubbles')
+      .then(() => console.log('✓ Bubble images loaded'))
+      .catch(err => console.warn('Failed to load bubbles:', err));
+
+    ImageLoader.loadSnowflakes('/snowflakes')
+      .then(() => console.log('✓ Snowflake images loaded'))
+      .catch(err => console.warn('Failed to load snowflakes:', err));
+  }, []);
+
+  return <CursorFX effect="bubble" />;
+}
+```
+
+### Vanilla JavaScript Example
 
 ```javascript
-import { ImageLoader } from 'cursor-fx';
+import { initCursorFX, ImageLoader } from 'cursor-fx/vanilla';
 
-// Preload before using effects
-await ImageLoader.loadBubbles('/path/to/bubbles');
-await ImageLoader.loadSnowflakes('/path/to/snowflakes');
+// Preload images first
+Promise.all([
+  ImageLoader.loadBubbles('/bubbles'),
+  ImageLoader.loadSnowflakes('/snowflakes')
+])
+  .then(() => {
+    console.log('✓ All images loaded');
 
-// Effects will automatically use images if loaded
-const bubbleEffect = createBubbleEffect();
+    // Initialize effect after images are ready
+    const fx = initCursorFX({ effect: 'bubble' });
+  })
+  .catch(err => {
+    console.warn('Failed to load images:', err);
+    // Effect will still work with canvas fallback
+    const fx = initCursorFX({ effect: 'bubble' });
+  });
 ```
+
+### CDN Example
+
+```html
+<script src="https://unpkg.com/cursor-fx@latest/dist/cdn/cursor-fx.min.js"></script>
+
+<script>
+  // Preload images from your server
+  CursorFX.ImageLoader.loadBubbles('/bubbles')
+    .then(() => {
+      // Initialize bubble effect with images
+      const fx = CursorFX.initCursorFX({ effect: 'bubble' });
+    });
+</script>
+```
+
+### ImageLoader API
+
+```typescript
+// Load bubble images (expects 3 PNGs in the directory)
+ImageLoader.loadBubbles(basePath?: string): Promise<HTMLImageElement[]>
+
+// Load snowflake images (expects 2+ PNGs in the directory)
+ImageLoader.loadSnowflakes(basePath?: string): Promise<HTMLImageElement[]>
+
+// Load a single image
+ImageLoader.loadImage(src: string): Promise<HTMLImageElement>
+
+// Check if any images are loaded
+ImageLoader.isLoaded(): boolean
+
+// Clear all cached images
+ImageLoader.clear(): void
+```
+
+**Required file names:**
+- Bubbles: `soap_bubbles_1.png`, `soap_bubble_2.png`, `soap_bubble_3.png`
+- Snowflakes: `snow_flake_1.png`, `snow_flake_2.png`
+
+**Fallback Behavior:**
+If images fail to load or aren't preloaded, bubble and snow effects automatically use optimized canvas rendering instead. Your effects will always work!
 
 **Included Assets:**
 - 3 bubble variations (~148KB total)
-- 3 snowflake variations (~140KB total)
+- 2 snowflake variations (~140KB total)
 
-Assets are automatically copied to `dist/bubbles/` and `dist/snowflakes/` during build.
+Assets are bundled at `dist/bubbles/` and `dist/snowflakes/`.
 
 ## 🎨 Customizing Colors
 

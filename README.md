@@ -8,6 +8,14 @@ Beautiful, customizable cursor particle effects for React and vanilla JavaScript
 
 **[🎮 Live Demo](https://www.antoprav.in/work/cursor-fx)** | **[📖 Documentation](#-api-reference)** | **[⭐ GitHub](https://github.com/antopravin-dev/cursor-fx)**
 
+<div align="center">
+
+![Cursor FX Demo](./assets/cursor-fx-preview.mp4)
+
+**✨ Experience magical cursor effects with 6 stunning built-in animations ✨**
+
+</div>
+
 ## ✨ Features
 
 - 🎨 **6 Built-in Effects**: Bubbles, Snow, Fairy Dust, Sparkle, Confetti, Retro CRT

@@ -13,10 +13,10 @@ export function createRetroCRTEffect(options: EffectOptions = {}): Effect {
   const {
     colors = DEFAULT_COLORS,
     particleCount = 3,
-    particleSize = 3,
+    particleSize = 4, // Slightly larger for better visibility
     gravity = 0, // No gravity - phosphor glows in place
-    maxLife = 50, // Longer persistence like real phosphor
-    velocity = 2, // Slower, more subtle movement
+    maxLife = 60, // Longer persistence like real phosphor
+    velocity = 1, // Very slow movement for authentic glow
   } = options;
 
   return {
@@ -34,7 +34,7 @@ export function createRetroCRTEffect(options: EffectOptions = {}): Effect {
             color: randomColor(colors),
             maxLife: maxLife + Math.random() * 15,
             gravity,
-            shape: 'circle',
+            shape: 'circle', // Back to circles with strong glow
           })
         );
       }

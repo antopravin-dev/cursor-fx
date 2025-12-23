@@ -13,4 +13,5 @@ export default defineConfig({
   minify: false,
   external: ['react', 'react-dom'],
   treeshake: true,
+  publicDir: 'src/assets', // Copy assets to dist
 });

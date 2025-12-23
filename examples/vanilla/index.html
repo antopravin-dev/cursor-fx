@@ -135,9 +135,15 @@
   <script type="module">
     // Import from the built dist folder
     import { initCursorFX } from '../../dist/vanilla/index.mjs';
+    import { ImageLoader } from '../../dist/core/index.mjs';
 
     let currentFx = null;
     let currentEffect = 'fairyDust';
+
+    // Preload bubble images (relative to the HTML file)
+    ImageLoader.loadBubbles('./bubbles')
+      .then(() => console.log('Bubble images loaded successfully'))
+      .catch(err => console.warn('Failed to load bubble images:', err));
 
     function startEffect(effectType) {
       if (currentFx) {
@@ -148,7 +154,7 @@
 
       currentFx = initCursorFX({
         effect: effectType,
-        particleCount: 5, // Reduced for performance
+        particleCount: 1, // Reduced for performance
         particleSize: 3,
         colors: effectType === 'confetti'
           ? [
@@ -170,34 +176,34 @@
               '#00BFFF',
             ]
             : effectType === 'retroCRT'
-            ? [
-              '#00FF00',
-              '#33FF33',
-              '#00CC00',
-              '#00DD00',
-            ]
-            : effectType === 'snow'
-            ? [
-              '#FFFFFF',
-              '#F0F8FF',
-              '#E6F3FF',
-              '#F5F5F5',
-            ]
-            : effectType === 'bubble'
-            ? [
-              '#ADD8E6',
-              '#87CEEB',
-              '#B0E0E6',
-              '#AFEEEE',
-              '#E0FFFF',
-            ]
-            : [
-              '#FFD700',
-              '#FFC700',
-              '#FFB700',
-              '#FFED4E',
-              '#F4E04D',
-            ]
+              ? [
+                '#00FF00',
+                '#33FF33',
+                '#00CC00',
+                '#00DD00',
+              ]
+              : effectType === 'snow'
+                ? [
+                  '#FFFFFF',
+                  '#F0F8FF',
+                  '#E6F3FF',
+                  '#F5F5F5',
+                ]
+                : effectType === 'bubble'
+                  ? [
+                    '#ADD8E6',
+                    '#87CEEB',
+                    '#B0E0E6',
+                    '#AFEEEE',
+                    '#E0FFFF',
+                  ]
+                  : [
+                    '#FFD700',
+                    '#FFC700',
+                    '#FFB700',
+                    '#FFED4E',
+                    '#F4E04D',
+                  ]
       });
 
       // Update button styles

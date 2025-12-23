@@ -12,14 +12,18 @@ const DEFAULT_COLORS = [
 export function createSnowEffect(options: EffectOptions = {}): Effect {
   const {
     colors = DEFAULT_COLORS,
-    particleCount = 3,
-    particleSize = 4,
-    gravity = 0.15, // Gentle falling
-    maxLife = 80, // Long lifetime for slow fall
-    velocity = 1.5, // Slow drift
+    particleCount = 1, // One snowflake at a time
+    particleSize = 6, // Slightly bigger for visibility
+    gravity = 0.05, // Very gentle falling (was 0.08)
+    maxLife = 200, // Longer lifetime for slow, graceful fall (was 150)
+    velocity = 0.3, // Minimal base drift (was 0.8)
+    throttle = 120, // Spawn every 120ms - less frequent
+    minMoveDistance = 12, // Only spawn when cursor moves 12px
   } = options;
 
   return {
+    throttle,
+    minMoveDistance,
     onMouseMove(x: number, y: number): Particle[] {
       const particles: Particle[] = [];
 
@@ -27,14 +31,17 @@ export function createSnowEffect(options: EffectOptions = {}): Effect {
         particles.push(
           new Particle({
             x: x + (Math.random() - 0.5) * 30,
-            y: y + (Math.random() - 0.5) * 10,
-            vx: (Math.random() - 0.5) * velocity, // Gentle horizontal drift
-            vy: Math.random() * 0.5, // Slight downward initial velocity
-            size: Math.random() * particleSize + 1, // Variable snowflake sizes
+            y: y + (Math.random() - 0.5) * 15,
+            vx: (Math.random() - 0.5) * velocity, // Minimal base drift
+            vy: Math.random() * 0.1 + 0.05, // Very slow downward initial velocity
+            size: Math.random() * particleSize + 2, // Variable sizes (2-8px)
             color: randomColor(colors),
-            maxLife: maxLife + Math.random() * 30,
+            maxLife: maxLife + Math.random() * 80,
             gravity,
-            shape: 'circle',
+            rotation: Math.random() * Math.PI * 2, // Random initial rotation
+            rotationSpeed: (Math.random() - 0.5) * 0.008, // Very slow rotation
+            shape: 'snowflake',
+            windDrift: 0.8, // Gentle wind drift/sway
           })
         );
       }

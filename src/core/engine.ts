@@ -43,17 +43,19 @@ export class CursorFXEngine {
   }
 
   private handleMouseMove(e: MouseEvent): void {
+    if (!this.effect) return;
+
     const now = Date.now();
     const dx = e.clientX - this.lastMouseX;
     const dy = e.clientY - this.lastMouseY;
     const distance = Math.sqrt(dx * dx + dy * dy);
 
+    // Use effect-specific throttle and move distance if provided
+    const throttle = this.effect.throttle ?? this.particleThrottle;
+    const minDist = this.effect.minMoveDistance ?? this.minMoveDistance;
+
     // Only create particles if enough time passed AND mouse moved enough
-    if (
-      this.effect &&
-      now - this.lastParticleTime >= this.particleThrottle &&
-      distance >= this.minMoveDistance
-    ) {
+    if (now - this.lastParticleTime >= throttle && distance >= minDist) {
       this.lastParticleTime = now;
       this.lastMouseX = e.clientX;
       this.lastMouseY = e.clientY;
@@ -71,8 +73,12 @@ export class CursorFXEngine {
     const dy = touch.clientY - this.lastMouseY;
     const distance = Math.sqrt(dx * dx + dy * dy);
 
+    // Use effect-specific throttle and move distance if provided
+    const throttle = this.effect.throttle ?? this.particleThrottle;
+    const minDist = this.effect.minMoveDistance ?? this.minMoveDistance;
+
     // Only create particles if enough time passed AND touch moved enough
-    if (now - this.lastParticleTime >= this.particleThrottle && distance >= this.minMoveDistance) {
+    if (now - this.lastParticleTime >= throttle && distance >= minDist) {
       this.lastParticleTime = now;
       this.lastMouseX = touch.clientX;
       this.lastMouseY = touch.clientY;

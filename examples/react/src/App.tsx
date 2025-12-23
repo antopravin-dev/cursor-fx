@@ -1,17 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CursorFX } from '../../../dist/react/index.mjs';
 import type { CursorEffectType } from '../../../dist/react/index.mjs';
+
+// Import ImageLoader from core build
+import { ImageLoader } from '../../../dist/core/index.mjs';
 
 function App() {
   const [enabled, setEnabled] = useState(true);
   const [effect, setEffect] = useState<CursorEffectType>('fairyDust');
+
+  // Preload bubble images on mount
+  useEffect(() => {
+    ImageLoader.loadBubbles('/bubbles')
+      .then(() => console.log('Bubble images loaded successfully'))
+      .catch(err => console.warn('Failed to load bubble images:', err));
+  }, []);
 
   return (
     <>
       <CursorFX
         enabled={enabled}
         effect={effect}
-        particleCount={2}
+        particleCount={effect === 'bubble' || effect === 'snow' ? 1 : 2}
         particleSize={3}
         colors={
           effect === 'confetti'

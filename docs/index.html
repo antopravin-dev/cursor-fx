@@ -222,13 +222,18 @@
     let currentEffect = 'fairyDust';
 
     // Preload bubble and snowflake images for better visual quality
-    CursorFX.ImageLoader.loadBubbles('./bubbles')
-      .then(() => console.log('✅ Bubble images loaded'))
-      .catch(err => console.warn('⚠️ Failed to load bubble images:', err));
+    // Check if ImageLoader is available (in newer versions)
+    if (CursorFX.ImageLoader) {
+      CursorFX.ImageLoader.loadBubbles('./bubbles')
+        .then(() => console.log('✅ Bubble images loaded'))
+        .catch(err => console.warn('⚠️ Failed to load bubble images:', err));
 
-    CursorFX.ImageLoader.loadSnowflakes('./snowflakes')
-      .then(() => console.log('✅ Snowflake images loaded'))
-      .catch(err => console.warn('⚠️ Failed to load snowflake images:', err));
+      CursorFX.ImageLoader.loadSnowflakes('./snowflakes')
+        .then(() => console.log('✅ Snowflake images loaded'))
+        .catch(err => console.warn('⚠️ Failed to load snowflake images:', err));
+    } else {
+      console.log('ℹ️ ImageLoader not available, using canvas rendering');
+    }
 
     function startEffect(effectType) {
       if (currentFx) {

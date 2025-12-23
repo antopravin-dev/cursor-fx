@@ -26,30 +26,35 @@
       position: relative;
     }
 
-    /* Dynamic backgrounds for each effect */
+    /* Contrasting backgrounds to highlight each effect */
     body.effect-bubble {
-      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+      /* Dark elegant background to make light blue bubbles pop */
+      background: linear-gradient(135deg, #0a0e27 0%, #1a1d3a 50%, #2d1b3d 100%);
     }
 
     body.effect-snow {
-      background: linear-gradient(135deg, #e0f7fa 0%, #b3e5fc 50%, #4fc3f7 100%);
-      color: #1a237e;
+      /* Deep navy to contrast white snowflakes */
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
     }
 
     body.effect-fairyDust {
-      background: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #ffd140 100%);
+      /* Deep purple to contrast golden fairy dust */
+      background: linear-gradient(135deg, #1a0b2e 0%, #2d1b4e 50%, #3d2963 100%);
     }
 
     body.effect-sparkle {
-      background: linear-gradient(135deg, #fa709a 0%, #fee140 50%, #30cfd0 100%);
+      /* Rich dark background for rainbow sparkles */
+      background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #1f2937 100%);
     }
 
     body.effect-confetti {
-      background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 50%, #6c5b7b 100%);
+      /* Dark charcoal for colorful confetti */
+      background: linear-gradient(135deg, #18181b 0%, #27272a 50%, #3f3f46 100%);
     }
 
     body.effect-retroCRT {
-      background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+      /* Pure black for green phosphor glow */
+      background: linear-gradient(135deg, #000000 0%, #0a0a0a 50%, #1a1a1a 100%);
     }
 
     /* Animated gradient overlay */
@@ -274,31 +279,7 @@
       background: #f8f9ff;
     }
 
-    /* Snow effect specific styles */
-    body.effect-snow .link-btn {
-      color: #1e40af;
-    }
-
-    body.effect-snow h1,
-    body.effect-snow .subtitle,
-    body.effect-snow button {
-      color: #1a237e;
-    }
-
-    body.effect-snow button {
-      border-color: rgba(26, 35, 126, 0.4);
-      background: rgba(26, 35, 126, 0.15);
-    }
-
-    body.effect-snow button:hover {
-      background: rgba(26, 35, 126, 0.25);
-      border-color: rgba(26, 35, 126, 0.6);
-    }
-
-    body.effect-snow button.active {
-      background: rgba(26, 35, 126, 0.35);
-      border-color: rgba(26, 35, 126, 0.8);
-    }
+    /* All backgrounds are dark now for maximum contrast */
 
     @media (max-width: 640px) {
       .effect-grid {

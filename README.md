@@ -467,9 +467,9 @@ Built with:
 ## 🔗 Links
 
 - [npm Package](https://www.npmjs.com/package/cursor-fx)
-- [GitHub Repository](https://github.com/yourusername/cursor-fx)
+- [GitHub Repository](https://github.com/antopravin-dev/cursor-fx)
 - [Documentation](./EFFECT_DEFAULTS.md)
 
 ---
 
-**Made with ✨ by [Your Name](https://github.com/yourusername)**
+**Made with ✨ by [Anto Pravin C](https://github.com/antopravin-dev)**

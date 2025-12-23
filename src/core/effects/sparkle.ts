@@ -13,7 +13,7 @@ export function createSparkleEffect(options: EffectOptions = {}): Effect {
   const {
     colors = DEFAULT_COLORS,
     particleCount = 1, // Reduced for better performance
-    particleSize = 3,
+    particleSize = 6, // Increased from 3 for better visibility
     gravity = 0.1,
     maxLife = 20, // Further reduced for faster cleanup
     velocity = 4,
@@ -30,7 +30,7 @@ export function createSparkleEffect(options: EffectOptions = {}): Effect {
             y: y + (Math.random() - 0.5) * 10,
             vx: (Math.random() - 0.5) * velocity,
             vy: (Math.random() - 0.5) * velocity,
-            size: Math.random() * particleSize + 2,
+            size: Math.random() * particleSize + 3, // Increased from 2 (now 3-9px)
             color: randomColor(colors),
             maxLife: maxLife + Math.random() * 10, // Reduced random variation
             gravity,

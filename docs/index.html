@@ -221,6 +221,15 @@
     let currentFx = null;
     let currentEffect = 'fairyDust';
 
+    // Preload bubble and snowflake images for better visual quality
+    CursorFX.ImageLoader.loadBubbles('./bubbles')
+      .then(() => console.log('✅ Bubble images loaded'))
+      .catch(err => console.warn('⚠️ Failed to load bubble images:', err));
+
+    CursorFX.ImageLoader.loadSnowflakes('./snowflakes')
+      .then(() => console.log('✅ Snowflake images loaded'))
+      .catch(err => console.warn('⚠️ Failed to load snowflake images:', err));
+
     function startEffect(effectType) {
       if (currentFx) {
         currentFx.destroy();

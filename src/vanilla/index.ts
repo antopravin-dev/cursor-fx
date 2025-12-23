@@ -1,4 +1,7 @@
-import { CursorFXEngine, createFairyDustEffect, createSparkleEffect, createConfettiEffect, createRetroCRTEffect, createSnowEffect, createBubbleEffect } from '../core';
+import { CursorFXEngine, createFairyDustEffect, createSparkleEffect, createConfettiEffect, createRetroCRTEffect, createSnowEffect, createBubbleEffect, ImageLoader } from '../core';
+
+// Re-export ImageLoader for CDN and vanilla users
+export { ImageLoader };
 
 export type CursorEffectType = 'fairyDust' | 'sparkle' | 'confetti' | 'retroCRT' | 'snow' | 'bubble';
 
@@ -50,25 +53,20 @@ export function initCursorFX(options: InitCursorFXOptions = {}): CursorFXInstanc
   // Extract effect type from options
   const { effect = 'fairyDust', ...effectOptions } = options;
 
-  // Reduce particle count for better performance
-  const optimizedOptions = {
-    particleCount: 2, // Reduced from default 3
-    ...effectOptions,
-  };
-
   // Select effect based on type
+  // Each effect will use its own defaults unless overridden in effectOptions
   const selectedEffect =
     effect === 'confetti'
-      ? createConfettiEffect(optimizedOptions)
+      ? createConfettiEffect(effectOptions)
       : effect === 'sparkle'
-      ? createSparkleEffect(optimizedOptions)
+      ? createSparkleEffect(effectOptions)
       : effect === 'retroCRT'
-      ? createRetroCRTEffect(optimizedOptions)
+      ? createRetroCRTEffect(effectOptions)
       : effect === 'snow'
-      ? createSnowEffect(optimizedOptions)
+      ? createSnowEffect(effectOptions)
       : effect === 'bubble'
-      ? createBubbleEffect(optimizedOptions)
-      : createFairyDustEffect(optimizedOptions);
+      ? createBubbleEffect(effectOptions)
+      : createFairyDustEffect(effectOptions);
 
   // Start the engine with the effect
   engine.start(selectedEffect);

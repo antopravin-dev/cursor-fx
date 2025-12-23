@@ -14,215 +14,418 @@
     }
 
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       color: white;
-      overflow: hidden;
+      overflow-x: hidden;
+      transition: background 0.8s ease;
       position: relative;
+    }
+
+    /* Dynamic backgrounds for each effect */
+    body.effect-bubble {
+      background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #7e22ce 100%);
+    }
+
+    body.effect-snow {
+      background: linear-gradient(135deg, #e0f7fa 0%, #b3e5fc 50%, #4fc3f7 100%);
+      color: #1a237e;
+    }
+
+    body.effect-fairyDust {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #ffd140 100%);
+    }
+
+    body.effect-sparkle {
+      background: linear-gradient(135deg, #fa709a 0%, #fee140 50%, #30cfd0 100%);
+    }
+
+    body.effect-confetti {
+      background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 50%, #6c5b7b 100%);
+    }
+
+    body.effect-retroCRT {
+      background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+    }
+
+    /* Animated gradient overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
     }
 
     .container {
       text-align: center;
       z-index: 1;
       padding: 2rem;
-      max-width: 900px;
+      max-width: 1000px;
+      width: 100%;
     }
 
     h1 {
-      font-size: clamp(2.5rem, 8vw, 5rem);
-      margin-bottom: 1rem;
-      background: linear-gradient(45deg, #fff, #ffd700);
+      font-size: clamp(2.5rem, 10vw, 6rem);
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(45deg, #fff 30%, rgba(255, 255, 255, 0.8) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      font-weight: 700;
+      letter-spacing: -0.02em;
+      text-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
     }
 
     .subtitle {
       font-size: clamp(1rem, 3vw, 1.5rem);
+      margin-bottom: 3rem;
+      opacity: 0.95;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+
+    .effect-name {
+      display: inline-block;
+      padding: 0.5rem 1.5rem;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 50px;
+      font-size: 1.25rem;
+      font-weight: 600;
       margin-bottom: 2rem;
-      opacity: 0.9;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
     }
 
     .controls {
       display: flex;
-      flex-wrap: wrap;
       gap: 1rem;
       justify-content: center;
-      margin: 2rem 0;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
     }
 
     button {
       padding: 0.875rem 1.75rem;
       font-size: 1rem;
-      border: 2px solid white;
-      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.15);
       color: white;
-      border-radius: 8px;
+      border-radius: 12px;
       cursor: pointer;
       transition: all 0.3s ease;
       backdrop-filter: blur(10px);
-      font-weight: 500;
+      font-weight: 600;
+      position: relative;
+      overflow: hidden;
+    }
+
+    button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    button:hover::before {
+      width: 300px;
+      height: 300px;
     }
 
     button:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.25);
+      border-color: rgba(255, 255, 255, 0.6);
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     }
 
     button.active {
-      background: rgba(76, 175, 80, 0.5);
-      border-color: #4CAF50;
+      background: rgba(255, 255, 255, 0.35);
+      border-color: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+      transform: scale(1.05);
     }
 
-    .effect-buttons {
+    .effect-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
       gap: 1rem;
-      max-width: 600px;
-      margin: 0 auto;
+      max-width: 700px;
+      margin: 0 auto 3rem;
     }
 
-    .info {
+    .effect-btn {
+      font-size: 1.1rem;
+      padding: 1.25rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      min-height: 100px;
+      justify-content: center;
+    }
+
+    .effect-icon {
+      font-size: 2rem;
+      display: block;
+    }
+
+    .effect-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .info-card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 2.5rem;
       margin-top: 3rem;
-      padding: 2rem;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     }
 
-    .info h2 {
-      margin-bottom: 1.5rem;
-      font-size: 1.5rem;
+    .info-card h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      font-weight: 700;
     }
 
     .features {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
+      gap: 1.5rem;
       text-align: left;
+      margin-bottom: 2rem;
     }
 
     .feature {
-      padding: 1rem;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 8px;
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: all 0.3s ease;
+    }
+
+    .feature:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-4px);
     }
 
     .feature-icon {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+      display: block;
     }
 
     .feature-title {
-      font-weight: 600;
-      margin-bottom: 0.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      font-size: 1.1rem;
     }
 
     .feature-desc {
-      font-size: 0.875rem;
-      opacity: 0.8;
+      font-size: 0.9rem;
+      opacity: 0.9;
+      line-height: 1.5;
     }
 
     .links {
-      margin-top: 2rem;
       display: flex;
       gap: 1rem;
       justify-content: center;
       flex-wrap: wrap;
+      margin-top: 2rem;
     }
 
     .link-btn {
-      padding: 0.75rem 1.5rem;
+      padding: 1rem 2rem;
       background: white;
-      color: #667eea;
+      color: #6366f1;
       text-decoration: none;
-      border-radius: 8px;
-      font-weight: 600;
-      transition: all 0.3s;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     .link-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      background: #f8f9ff;
+    }
+
+    /* Snow effect specific styles */
+    body.effect-snow .link-btn {
+      color: #1e40af;
+    }
+
+    body.effect-snow h1,
+    body.effect-snow .subtitle,
+    body.effect-snow button {
+      color: #1a237e;
+    }
+
+    body.effect-snow button {
+      border-color: rgba(26, 35, 126, 0.4);
+      background: rgba(26, 35, 126, 0.15);
+    }
+
+    body.effect-snow button:hover {
+      background: rgba(26, 35, 126, 0.25);
+      border-color: rgba(26, 35, 126, 0.6);
+    }
+
+    body.effect-snow button.active {
+      background: rgba(26, 35, 126, 0.35);
+      border-color: rgba(26, 35, 126, 0.8);
     }
 
     @media (max-width: 640px) {
+      .effect-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
       button {
         padding: 0.75rem 1.25rem;
-        font-size: 0.875rem;
+        font-size: 0.9rem;
       }
+
+      .info-card {
+        padding: 1.5rem;
+      }
+
+      .features {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Pulse animation for effect name */
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.8; }
+    }
+
+    .effect-name {
+      animation: pulse 3s ease-in-out infinite;
     }
   </style>
 </head>
 
-<body>
+<body class="effect-fairyDust">
   <div class="container">
     <h1>✨ Cursor FX</h1>
-    <p class="subtitle">Beautiful cursor particle effects for your website</p>
+    <p class="subtitle">Beautiful cursor particle effects for the web</p>
+    <div class="effect-name" id="effectName">Fairy Dust</div>
 
     <div class="controls">
-      <button id="stopBtn">⏸️ Stop</button>
-      <button id="startBtn">▶️ Start</button>
+      <button id="stopBtn">⏸️ Pause</button>
+      <button id="startBtn">▶️ Resume</button>
     </div>
 
-    <div class="effect-buttons">
-      <button id="fairyDustBtn" class="active">✨ Fairy Dust</button>
-      <button id="sparkleBtn">⭐ Sparkle</button>
-      <button id="confettiBtn">🎉 Confetti</button>
-      <button id="retroCRTBtn">🖥️ Retro CRT</button>
-      <button id="snowBtn">❄️ Snow</button>
-      <button id="bubbleBtn">🫧 Bubble</button>
+    <div class="effect-grid">
+      <button id="fairyDustBtn" class="effect-btn active">
+        <span class="effect-icon">✨</span>
+        <span class="effect-label">Fairy Dust</span>
+      </button>
+      <button id="sparkleBtn" class="effect-btn">
+        <span class="effect-icon">⭐</span>
+        <span class="effect-label">Sparkle</span>
+      </button>
+      <button id="confettiBtn" class="effect-btn">
+        <span class="effect-icon">🎉</span>
+        <span class="effect-label">Confetti</span>
+      </button>
+      <button id="retroCRTBtn" class="effect-btn">
+        <span class="effect-icon">🖥️</span>
+        <span class="effect-label">Retro CRT</span>
+      </button>
+      <button id="snowBtn" class="effect-btn">
+        <span class="effect-icon">❄️</span>
+        <span class="effect-label">Snow</span>
+      </button>
+      <button id="bubbleBtn" class="effect-btn">
+        <span class="effect-icon">🫧</span>
+        <span class="effect-label">Bubble</span>
+      </button>
     </div>
 
-    <div class="info">
-      <h2>Features</h2>
+    <div class="info-card">
+      <h2>Why Cursor FX?</h2>
       <div class="features">
         <div class="feature">
-          <div class="feature-icon">🎨</div>
-          <div class="feature-title">6 Built-in Effects</div>
-          <div class="feature-desc">Bubbles, Snow, Fairy Dust, Sparkle, Confetti, Retro CRT</div>
+          <span class="feature-icon">🎨</span>
+          <div class="feature-title">6 Beautiful Effects</div>
+          <div class="feature-desc">Bubbles, Snow, Fairy Dust, Sparkle, Confetti, and Retro CRT</div>
         </div>
         <div class="feature">
-          <div class="feature-icon">⚡</div>
-          <div class="feature-title">High Performance</div>
-          <div class="feature-desc">Optimized canvas rendering with smart throttling</div>
+          <span class="feature-icon">⚡</span>
+          <div class="feature-title">Lightning Fast</div>
+          <div class="feature-desc">Optimized canvas rendering with smooth 60fps animations</div>
         </div>
         <div class="feature">
-          <div class="feature-icon">🎯</div>
+          <span class="feature-icon">🎯</span>
           <div class="feature-title">TypeScript Ready</div>
-          <div class="feature-desc">Full type definitions included</div>
+          <div class="feature-desc">Full type definitions and autocomplete support</div>
         </div>
         <div class="feature">
-          <div class="feature-icon">📦</div>
+          <span class="feature-icon">📦</span>
           <div class="feature-title">Tiny Bundle</div>
-          <div class="feature-desc">~12KB minified for CDN version</div>
+          <div class="feature-desc">Only 12KB minified for the CDN version</div>
         </div>
       </div>
 
       <div class="links">
-        <a href="https://www.npmjs.com/package/cursor-fx" class="link-btn" target="_blank">📦 npm Package</a>
-        <a href="https://github.com/antopravin-dev/cursor-fx" class="link-btn" target="_blank">⭐ GitHub</a>
-        <a href="https://github.com/antopravin-dev/cursor-fx#readme" class="link-btn" target="_blank">📖 Documentation</a>
+        <a href="https://www.npmjs.com/package/cursor-fx" class="link-btn" target="_blank">
+          📦 npm Package
+        </a>
+        <a href="https://github.com/antopravin-dev/cursor-fx" class="link-btn" target="_blank">
+          ⭐ GitHub
+        </a>
+        <a href="https://github.com/antopravin-dev/cursor-fx#readme" class="link-btn" target="_blank">
+          📖 Documentation
+        </a>
       </div>
     </div>
   </div>
 
-  <!-- Load from CDN (unpkg serves npm packages automatically) -->
+  <!-- Load from CDN -->
   <script src="https://unpkg.com/cursor-fx@latest/dist/cdn/cursor-fx.min.js"></script>
 
   <script>
     let currentFx = null;
     let currentEffect = 'fairyDust';
 
-    // Preload bubble and snowflake images for better visual quality
-    // Check if ImageLoader is available (in newer versions)
+    // Effect display names
+    const effectNames = {
+      fairyDust: 'Fairy Dust',
+      sparkle: 'Sparkle',
+      confetti: 'Confetti',
+      retroCRT: 'Retro CRT',
+      snow: 'Snow',
+      bubble: 'Bubble'
+    };
+
+    // Preload images if ImageLoader is available
     if (CursorFX.ImageLoader) {
       CursorFX.ImageLoader.loadBubbles('./bubbles')
         .then(() => console.log('✅ Bubble images loaded'))
@@ -231,8 +434,6 @@
       CursorFX.ImageLoader.loadSnowflakes('./snowflakes')
         .then(() => console.log('✅ Snowflake images loaded'))
         .catch(err => console.warn('⚠️ Failed to load snowflake images:', err));
-    } else {
-      console.log('ℹ️ ImageLoader not available, using canvas rendering');
     }
 
     function startEffect(effectType) {
@@ -245,8 +446,14 @@
         effect: effectType
       });
 
+      // Update background theme
+      document.body.className = 'effect-' + effectType;
+
+      // Update effect name display
+      document.getElementById('effectName').textContent = effectNames[effectType];
+
       // Update button states
-      document.querySelectorAll('.effect-buttons button').forEach(btn => {
+      document.querySelectorAll('.effect-btn').forEach(btn => {
         btn.classList.remove('active');
       });
       document.getElementById(effectType + 'Btn').classList.add('active');

@@ -10,7 +10,7 @@ Beautiful, customizable cursor particle effects for React and vanilla JavaScript
 
 <div align="center">
 
-![Cursor FX Demo](./assets/cursor-fx-preview.mp4)
+<video src="https://video-cdn.antopravin-dev.workers.dev/cursor-fx-preview-optimized.mp4" controls autoplay loop muted playsinline width="100%"></video>
 
 **✨ Experience magical cursor effects with 6 stunning built-in animations ✨**
 

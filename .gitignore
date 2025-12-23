@@ -34,3 +34,10 @@ coverage/
 .cache/
 .temp/
 .tmp/
+
+# Asset folders should only be in src/assets/
+/bubbles/
+/snowflakes/
+
+# npm pack artifacts
+*.tgz

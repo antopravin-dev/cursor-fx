@@ -1,18 +1,36 @@
-# cursor-fx
+# ✨ Cursor FX
 
-Beautiful, customizable cursor effects for React and vanilla JavaScript. Add magical fairy dust particles that follow your cursor with minimal setup.
+Beautiful, customizable cursor particle effects for React and vanilla JavaScript. Create magical experiences with effects like bubbles, snow, sparkles, and more!
 
-## Installation
+[![NPM Version](https://img.shields.io/npm/v/cursor-fx.svg)](https://www.npmjs.com/package/cursor-fx)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
+
+## ✨ Features
+
+- 🎨 **6 Built-in Effects**: Bubbles, Snow, Fairy Dust, Sparkle, Confetti, Retro CRT
+- ⚡ **High Performance**: Optimized canvas rendering with smart throttling
+- 🎯 **TypeScript Support**: Full type definitions included
+- 📦 **Tiny Bundle**: Lightweight with minimal dependencies
+- 🎭 **Customizable**: Colors, size, speed, and behavior all configurable
+- ⚛️ **React Ready**: Dedicated React components with hooks
+- 🌐 **Vanilla JS**: Works with any framework or no framework
+- 🖼️ **Image Support**: Use PNG assets for realistic effects
+
+## 📦 Installation
 
 ```bash
+# npm
 npm install cursor-fx
-# or
-pnpm add cursor-fx
-# or
+
+# yarn
 yarn add cursor-fx
+
+# pnpm
+pnpm add cursor-fx
 ```
 
-## Quick Start
+## 🚀 Quick Start
 
 ### React
 
@@ -22,7 +40,7 @@ import { CursorFX } from 'cursor-fx/react';
 function App() {
   return (
     <>
-      <CursorFX />
+      <CursorFX effect="bubble" />
       <YourContent />
     </>
   );
@@ -31,120 +49,427 @@ function App() {
 
 ### Vanilla JavaScript
 
-```js
-import { initCursorFX } from 'cursor-fx/vanilla';
-
-const fx = initCursorFX();
-
-// Clean up when needed
-fx.destroy();
-```
-
-## API
-
-### React
-
-#### `<CursorFX />` Component
-
-```tsx
-<CursorFX
-  colors={['#FFD700', '#FF69B4', '#00CED1']}
-  particleCount={5}
-  particleSize={4}
-  gravity={0.1}
-  maxLife={60}
-  velocity={4}
-  enabled={true}
-/>
-```
-
-#### `useCursorFX()` Hook
-
-```tsx
-import { useCursorFX } from 'cursor-fx/react';
-
-function MyComponent() {
-  useCursorFX({
-    colors: ['#FFD700', '#FF69B4'],
-    particleCount: 3,
-  });
-
-  return <div>Your content</div>;
-}
-```
-
-### Vanilla JavaScript
-
-#### `initCursorFX(options)`
-
-```js
+```javascript
 import { initCursorFX } from 'cursor-fx/vanilla';
 
 const fx = initCursorFX({
-  colors: ['#FFD700', '#FF69B4', '#00CED1'],
-  particleCount: 5,
-  particleSize: 4,
-  gravity: 0.1,
-  maxLife: 60,
-  velocity: 4,
+  effect: 'snow',
+  particleCount: 2
 });
 
-// Later...
+// Later, to clean up:
 fx.destroy();
 ```
 
-### Options
+## 🎨 Available Effects
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `colors` | `string[]` | `['#FFD700', '#FF69B4', '#00CED1', '#9370DB']` | Array of hex color codes for particles |
-| `particleCount` | `number` | `2` | Number of particles created per mouse move |
-| `particleSize` | `number` | `3` | Size of each particle |
-| `gravity` | `number` | `0.1` | Gravity effect on particles |
-| `maxLife` | `number` | `40` | Particle lifetime in frames (~0.7s at 60fps) |
-| `velocity` | `number` | `4` | Initial particle velocity |
-| `enabled` | `boolean` | `true` | Enable/disable effect (React only) |
+### 🫧 Bubble
+Floating soap bubbles that drift upward with a smooth pop-up animation.
 
-## Browser Compatibility
+```tsx
+<CursorFX effect="bubble" />
+```
+
+**Features:**
+- Transparent, realistic bubble rendering
+- Gentle upward float with wobble physics
+- Smooth scale-up animation on spawn (pops from 30% to 100% size)
+- Variable bubble sizes (37-112px)
+
+---
+
+### ❄️ Snow
+Delicate snowflakes that fall and drift with wind.
+
+```tsx
+<CursorFX effect="snow" />
+```
+
+**Features:**
+- Rotating snowflakes with 6-armed crystalline structure
+- Wind drift using smooth sine wave physics
+- White glow for visibility
+- Dual mode: PNG images or optimized canvas drawing
+
+---
+
+### ✨ Fairy Dust
+Golden magical particles that float upward.
+
+```tsx
+<CursorFX effect="fairyDust" />
+```
+
+**Features:**
+- Golden glow effect (shadowBlur: 18px)
+- Cross/plus shape particles
+- Upward floating motion (negative gravity)
+- Perfect for magical themes
+
+---
+
+### ⭐ Sparkle
+Quick, colorful sparkles that burst and fade.
+
+```tsx
+<CursorFX effect="sparkle" />
+```
+
+**Features:**
+- Rainbow colored particles
+- Fast, energetic movement
+- Short lifetime (20 frames) for clean trails
+- Star-shaped particles
+
+---
+
+### 🎉 Confetti
+Celebratory confetti that falls from cursor.
+
+```tsx
+<CursorFX effect="confetti" />
+```
+
+**Features:**
+- Party color palette
+- Rectangle particles with rotation
+- Realistic falling physics
+- Perfect for celebrations
+
+---
+
+### 🖥️ Retro CRT
+Phosphor green glow like old computer terminals.
+
+```tsx
+<CursorFX effect="retroCRT" />
+```
+
+**Features:**
+- Classic phosphor green colors
+- Circular particles with strong glow
+- Stationary particles (zero gravity)
+- Nostalgic terminal aesthetic
+
+## ⚙️ Configuration
+
+All effects support extensive customization:
+
+```tsx
+<CursorFX
+  effect="bubble"
+  particleCount={3}
+  colors={['#FF6B6B', '#4ECDC4', '#FFE66D']}
+/>
+```
+
+### Common Options
+
+| Option | Type | Description | Default |
+|--------|------|-------------|---------|
+| `effect` | `CursorEffectType` | Effect name | Required |
+| `particleCount` | `number` | Particles per spawn | Effect-specific |
+| `colors` | `string[]` | Particle colors | Effect-specific |
+| `particleSize` | `number` | Base particle size | Effect-specific |
+| `enabled` | `boolean` | Enable/disable | `true` (React) |
+
+### Advanced Options
+
+```typescript
+interface EffectOptions {
+  colors?: string[];          // Particle colors
+  particleCount?: number;     // Particles per spawn
+  particleSize?: number;      // Base size
+  gravity?: number;           // Vertical acceleration
+  maxLife?: number;           // Lifetime in frames
+  velocity?: number;          // Movement speed
+  throttle?: number;          // Ms between spawns
+  minMoveDistance?: number;   // Min cursor movement
+}
+```
+
+### Effect-Specific Defaults
+
+See [EFFECT_DEFAULTS.md](./EFFECT_DEFAULTS.md) for complete default values.
+
+**Quick Reference:**
+
+```typescript
+// All effects work with no options:
+<CursorFX effect="bubble" />    // Uses all defaults
+<CursorFX effect="snow" />      // Uses all defaults
+
+// Or customize only what you need:
+<CursorFX effect="bubble" particleCount={5} />
+<CursorFX effect="snow" colors={['#FFFFFF']} />
+```
+
+## 📚 API Reference
+
+### React Component
+
+```tsx
+import { CursorFX } from 'cursor-fx/react';
+
+<CursorFX
+  enabled={true}
+  effect="bubble"
+  particleCount={2}
+  colors={['#FFD700', '#FF69B4']}
+/>
+```
+
+**Props:**
+- `enabled?: boolean` - Enable/disable effect
+- `effect: CursorEffectType` - Effect name
+- All `EffectOptions` are also valid props
+
+### Vanilla JS
+
+```javascript
+import { initCursorFX } from 'cursor-fx/vanilla';
+
+const fx = initCursorFX({
+  effect: 'snow',
+  particleCount: 3,
+  colors: ['#FFFFFF', '#E0FFFF']
+});
+
+// Clean up when done
+fx.destroy();
+```
+
+### Core Engine (Advanced)
+
+For advanced use cases, use the core engine directly:
+
+```javascript
+import {
+  CursorFXEngine,
+  createBubbleEffect,
+  ImageLoader
+} from 'cursor-fx';
+
+// Preload images (optional)
+await ImageLoader.loadBubbles('/bubbles');
+await ImageLoader.loadSnowflakes('/snowflakes');
+
+// Create engine and effect
+const engine = new CursorFXEngine();
+const effect = createBubbleEffect({
+  particleCount: 2,
+  colors: ['#ADD8E6']
+});
+
+engine.start(effect);
+
+// Later
+engine.stop();
+engine.destroy();
+```
+
+## 🖼️ Using Image Assets
+
+Some effects support PNG assets for photorealistic quality:
+
+```javascript
+import { ImageLoader } from 'cursor-fx';
+
+// Preload before using effects
+await ImageLoader.loadBubbles('/path/to/bubbles');
+await ImageLoader.loadSnowflakes('/path/to/snowflakes');
+
+// Effects will automatically use images if loaded
+const bubbleEffect = createBubbleEffect();
+```
+
+**Included Assets:**
+- 3 bubble variations (~148KB total)
+- 3 snowflake variations (~140KB total)
+
+Assets are automatically copied to `dist/bubbles/` and `dist/snowflakes/` during build.
+
+## 🎨 Customizing Colors
+
+Each effect has themed default colors, but you can easily customize:
+
+```tsx
+// Transparent pink bubbles
+<CursorFX
+  effect="bubble"
+  colors={[
+    'rgba(255, 192, 203, 0.4)', // Pink
+    'rgba(255, 182, 193, 0.4)', // Light pink
+  ]}
+/>
+
+// Blue-tinted snow
+<CursorFX
+  effect="snow"
+  colors={['#E0FFFF', '#F0F8FF', '#F5FFFA']}
+/>
+
+// Custom sparkle colors
+<CursorFX
+  effect="sparkle"
+  colors={['#FF0000', '#00FF00', '#0000FF']}
+/>
+```
+
+## 📱 Performance Tips
+
+1. **Reduce Spawn Rate**: Increase `throttle` and `minMoveDistance`
+
+```tsx
+<CursorFX
+  effect="bubble"
+  throttle={200}         // 200ms between spawns
+  minMoveDistance={20}   // Spawn only after 20px movement
+/>
+```
+
+2. **Lower Particle Count**: Reduce particles per spawn
+
+```tsx
+<CursorFX effect="snow" particleCount={1} />
+```
+
+3. **Shorter Lifetime**: Particles disappear faster
+
+```tsx
+<CursorFX effect="sparkle" maxLife={15} />
+```
+
+4. **Disable on Mobile**: Conditional rendering
+
+```tsx
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+<CursorFX effect="bubble" enabled={!isMobile} />
+```
+
+## 🔧 Advanced Usage
+
+### Multiple Effects with Switching
+
+```tsx
+function App() {
+  const [effect, setEffect] = useState('bubble');
+
+  return (
+    <>
+      <CursorFX effect={effect} />
+
+      <button onClick={() => setEffect('snow')}>Snow</button>
+      <button onClick={() => setEffect('bubble')}>Bubble</button>
+      <button onClick={() => setEffect('confetti')}>Confetti</button>
+    </>
+  );
+}
+```
+
+### Dynamic Configuration
+
+```tsx
+const [config, setConfig] = useState({
+  particleCount: 2,
+  colors: ['#FFD700', '#FFC700']
+});
+
+<CursorFX effect="fairyDust" {...config} />
+
+<button onClick={() => setConfig({...config, particleCount: 5})}>
+  More Particles
+</button>
+```
+
+### Conditional Effects
+
+```tsx
+<CursorFX
+  effect="confetti"
+  enabled={isCelebrating}
+  particleCount={8}
+/>
+```
+
+## 🌐 Browser Compatibility
 
 Works in all modern browsers that support:
 - Canvas API
 - ES2020+
 - RequestAnimationFrame
 
-**Mobile Support:** Touch events are fully supported. The effect follows touch movements on mobile devices.
+**Mobile Support:** Touch events fully supported.
 
-**Performance:**
-- Maximum of 500 particles rendered at once to prevent lag
-- Throttled particle creation (~60fps) to prevent event flooding
-- Automatic respect for `prefers-reduced-motion` (disables effect)
-- Optimized defaults: 2 particles per move, 40 frame lifetime (~0.7s)
+**Performance Optimizations:**
+- Max 500 particles to prevent lag
+- Smart throttling (~60fps)
+- Wind drift with smooth Perlin-like noise
+- Optimized canvas rendering (single-path snowflakes = 18x faster)
 
-## Bundle Size
+## 📦 Bundle Size
 
-Tiny footprint for maximum performance:
-- Core: ~4KB (ESM, minified)
-- React: ~4KB (ESM, minified)
-- Vanilla: ~4KB (ESM, minified)
+Optimized for minimal impact:
+- Core: ~6KB (minified + gzipped)
+- React: ~7KB (minified + gzipped)
+- Vanilla: ~6KB (minified + gzipped)
 
-Zero dependencies (React is a peer dependency).
+**Dependencies:**
+- Zero runtime dependencies
+- React is a peer dependency (optional)
 
-## TypeScript
+## 🎯 TypeScript
 
-Full TypeScript support included. All exports are fully typed.
+Full TypeScript support included:
 
-```tsx
-import type { UseCursorFXOptions } from 'cursor-fx/react';
-import type { InitCursorFXOptions } from 'cursor-fx/vanilla';
-import type { EffectOptions } from 'cursor-fx';
+```typescript
+import type { CursorEffectType, EffectOptions } from 'cursor-fx';
+import type { CursorFXProps } from 'cursor-fx/react';
+
+const effect: CursorEffectType = 'bubble';
+
+const options: EffectOptions = {
+  particleCount: 3,
+  colors: ['#FF0000']
+};
 ```
 
-## Examples
+## 📂 Examples
 
-Check out the `examples/` folder for working demos:
-- `examples/react` - Vite + React example
-- `examples/vanilla` - Plain HTML example
+Working examples included:
+- `examples/react/` - Vite + React demo
+- `examples/vanilla/` - Plain HTML demo
 
-## License
+Run examples:
+```bash
+cd examples/react
+npm install
+npm run dev
+```
 
-MIT © cursor-fx contributors
+## 🤝 Contributing
+
+Contributions welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+MIT © [Your Name]
+
+## 🙏 Acknowledgments
+
+Built with:
+- TypeScript
+- React (peer dependency)
+- HTML5 Canvas API
+- tsup for bundling
+
+## 🔗 Links
+
+- [npm Package](https://www.npmjs.com/package/cursor-fx)
+- [GitHub Repository](https://github.com/yourusername/cursor-fx)
+- [Documentation](./EFFECT_DEFAULTS.md)
+
+---
+
+**Made with ✨ by [Your Name](https://github.com/yourusername)**

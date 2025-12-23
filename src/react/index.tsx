@@ -1,5 +1,5 @@
 import { useEffect, useRef, useMemo } from 'react';
-import { CursorFXEngine, createFairyDustEffect, createSparkleEffect, createConfettiEffect, createRetroCRTEffect, createSnowEffect, createBubbleEffect } from '../core';
+import { CursorFXEngine, createFairyDustEffect, createSparkleEffect, createConfettiEffect, createRetroCRTEffect, createSnowEffect, createBubbleEffect, ImageLoader } from '../core';
 
 export type CursorEffectType = 'fairyDust' | 'sparkle' | 'confetti' | 'retroCRT' | 'snow' | 'bubble';
 
@@ -61,9 +61,8 @@ export function useCursorFX(options: UseCursorFXOptions = {}) {
     // Create engine (automatically creates canvas)
     const engine = new CursorFXEngine();
 
-    // Reduce particle count for better performance
-    const optimizedOptions = {
-      particleCount: 2, // Reduced from default 3
+    // Build options object, only including user-provided values
+    const effectOptions = {
       ...(memoizedColors && { colors: memoizedColors }),
       ...(particleCount !== undefined && { particleCount }),
       ...(particleSize !== undefined && { particleSize }),
@@ -75,16 +74,16 @@ export function useCursorFX(options: UseCursorFXOptions = {}) {
     // Select effect based on type
     const selectedEffect =
       effect === 'confetti'
-        ? createConfettiEffect(optimizedOptions)
+        ? createConfettiEffect(effectOptions)
         : effect === 'sparkle'
-        ? createSparkleEffect(optimizedOptions)
+        ? createSparkleEffect(effectOptions)
         : effect === 'retroCRT'
-        ? createRetroCRTEffect(optimizedOptions)
+        ? createRetroCRTEffect(effectOptions)
         : effect === 'snow'
-        ? createSnowEffect(optimizedOptions)
+        ? createSnowEffect(effectOptions)
         : effect === 'bubble'
-        ? createBubbleEffect(optimizedOptions)
-        : createFairyDustEffect(optimizedOptions);
+        ? createBubbleEffect(effectOptions)
+        : createFairyDustEffect(effectOptions);
 
     // Start the effect
     engine.start(selectedEffect);
@@ -128,3 +127,6 @@ export function CursorFX(props: UseCursorFXOptions) {
 
 // Export types for TypeScript users
 export type { EffectOptions } from '../core/types';
+
+// Export ImageLoader for preloading bubble and snowflake images
+export { ImageLoader };

@@ -1,0 +1,48 @@
+# Source files (already built in dist/)
+src/
+tsconfig.json
+tsup.config.ts
+
+# Examples and demos
+examples/
+
+# Development files
+node_modules/
+.git/
+.gitignore
+*.log
+*.lock
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files
+test/
+tests/
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+
+# Documentation source (keep README.md)
+docs/
+
+# CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+
+# Build artifacts we don't need
+coverage/
+.nyc_output/

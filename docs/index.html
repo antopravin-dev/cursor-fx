@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cursor FX - Beautiful Cursor Effects</title>
+  <meta name="description" content="Beautiful, customizable cursor particle effects for your website. Try bubbles, snow, sparkles, and more!">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .container {
+      text-align: center;
+      z-index: 1;
+      padding: 2rem;
+      max-width: 900px;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, #fff, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+
+    button {
+      padding: 0.875rem 1.75rem;
+      font-size: 1rem;
+      border: 2px solid white;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      font-weight: 500;
+    }
+
+    button:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    button.active {
+      background: rgba(76, 175, 80, 0.5);
+      border-color: #4CAF50;
+    }
+
+    .effect-buttons {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .info {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+    }
+
+    .info h2 {
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      text-align: left;
+    }
+
+    .feature {
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+    }
+
+    .feature-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .feature-title {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .feature-desc {
+      font-size: 0.875rem;
+      opacity: 0.8;
+    }
+
+    .links {
+      margin-top: 2rem;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .link-btn {
+      padding: 0.75rem 1.5rem;
+      background: white;
+      color: #667eea;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .link-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+    }
+
+    @media (max-width: 640px) {
+      button {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.875rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1>✨ Cursor FX</h1>
+    <p class="subtitle">Beautiful cursor particle effects for your website</p>
+
+    <div class="controls">
+      <button id="stopBtn">⏸️ Stop</button>
+      <button id="startBtn">▶️ Start</button>
+    </div>
+
+    <div class="effect-buttons">
+      <button id="fairyDustBtn" class="active">✨ Fairy Dust</button>
+      <button id="sparkleBtn">⭐ Sparkle</button>
+      <button id="confettiBtn">🎉 Confetti</button>
+      <button id="retroCRTBtn">🖥️ Retro CRT</button>
+      <button id="snowBtn">❄️ Snow</button>
+      <button id="bubbleBtn">🫧 Bubble</button>
+    </div>
+
+    <div class="info">
+      <h2>Features</h2>
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon">🎨</div>
+          <div class="feature-title">6 Built-in Effects</div>
+          <div class="feature-desc">Bubbles, Snow, Fairy Dust, Sparkle, Confetti, Retro CRT</div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">⚡</div>
+          <div class="feature-title">High Performance</div>
+          <div class="feature-desc">Optimized canvas rendering with smart throttling</div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🎯</div>
+          <div class="feature-title">TypeScript Ready</div>
+          <div class="feature-desc">Full type definitions included</div>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">📦</div>
+          <div class="feature-title">Tiny Bundle</div>
+          <div class="feature-desc">~12KB minified for CDN version</div>
+        </div>
+      </div>
+
+      <div class="links">
+        <a href="https://www.npmjs.com/package/cursor-fx" class="link-btn" target="_blank">📦 npm Package</a>
+        <a href="https://github.com/antopravin-dev/cursor-fx" class="link-btn" target="_blank">⭐ GitHub</a>
+        <a href="https://github.com/antopravin-dev/cursor-fx#readme" class="link-btn" target="_blank">📖 Documentation</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load from CDN (unpkg serves npm packages automatically) -->
+  <script src="https://unpkg.com/cursor-fx@latest/dist/cdn/cursor-fx.min.js"></script>
+
+  <script>
+    let currentFx = null;
+    let currentEffect = 'fairyDust';
+
+    function startEffect(effectType) {
+      if (currentFx) {
+        currentFx.destroy();
+      }
+
+      currentEffect = effectType;
+      currentFx = CursorFX.initCursorFX({
+        effect: effectType
+      });
+
+      // Update button states
+      document.querySelectorAll('.effect-buttons button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.getElementById(effectType + 'Btn').classList.add('active');
+    }
+
+    // Initialize with fairy dust
+    startEffect('fairyDust');
+
+    // Control buttons
+    document.getElementById('stopBtn').addEventListener('click', () => {
+      if (currentFx) {
+        currentFx.destroy();
+        currentFx = null;
+      }
+    });
+
+    document.getElementById('startBtn').addEventListener('click', () => {
+      if (!currentFx) {
+        startEffect(currentEffect);
+      }
+    });
+
+    // Effect buttons
+    document.getElementById('fairyDustBtn').addEventListener('click', () => startEffect('fairyDust'));
+    document.getElementById('sparkleBtn').addEventListener('click', () => startEffect('sparkle'));
+    document.getElementById('confettiBtn').addEventListener('click', () => startEffect('confetti'));
+    document.getElementById('retroCRTBtn').addEventListener('click', () => startEffect('retroCRT'));
+    document.getElementById('snowBtn').addEventListener('click', () => startEffect('snow'));
+    document.getElementById('bubbleBtn').addEventListener('click', () => startEffect('bubble'));
+  </script>
+</body>
+
+</html>

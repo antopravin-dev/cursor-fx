@@ -6,6 +6,8 @@ Beautiful, customizable cursor particle effects for React and vanilla JavaScript
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 
+**[🎮 Live Demo](https://antopravin-dev.github.io/cursor-fx)** | **[📖 Documentation](#-api-reference)** | **[⭐ GitHub](https://github.com/antopravin-dev/cursor-fx)**
+
 ## ✨ Features
 
 - 🎨 **6 Built-in Effects**: Bubbles, Snow, Fairy Dust, Sparkle, Confetti, Retro CRT
@@ -60,6 +62,40 @@ const fx = initCursorFX({
 // Later, to clean up:
 fx.destroy();
 ```
+
+### CDN (No Build Step)
+
+Use directly in your HTML without any build tools:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My Website</title>
+</head>
+<body>
+  <h1>Hello World</h1>
+
+  <!-- Load from CDN -->
+  <script src="https://unpkg.com/cursor-fx@latest/dist/cdn/cursor-fx.min.js"></script>
+
+  <script>
+    // Use the global CursorFX object
+    const fx = CursorFX.initCursorFX({
+      effect: 'bubble'
+    });
+  </script>
+</body>
+</html>
+```
+
+**CDN Options:**
+- **unpkg**: `https://unpkg.com/cursor-fx@latest/dist/cdn/cursor-fx.min.js`
+- **jsdelivr**: `https://cdn.jsdelivr.net/npm/cursor-fx@latest/dist/cdn/cursor-fx.min.js`
+
+**Available via global `CursorFX` object:**
+- `CursorFX.initCursorFX(options)` - Initialize effects
+- `CursorFX.ImageLoader` - Preload images (optional)
 
 ## 🎨 Available Effects
 

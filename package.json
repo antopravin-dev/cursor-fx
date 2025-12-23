@@ -1,12 +1,16 @@
 {
   "name": "cursor-fx",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Beautiful, customizable cursor effects for React and vanilla JavaScript. Add magical fairy dust particles that follow your cursor with minimal setup.",
   "author": "Anto Pravin C <antopravin.dev@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/antopravin-dev/cursor-fx.git"
+  },
+  "homepage": "https://antopravin-dev.github.io/cursor-fx",
+  "bugs": {
+    "url": "https://github.com/antopravin-dev/cursor-fx/issues"
   },
   "keywords": [
     "cursor",
@@ -19,7 +23,13 @@
     "mouse-effects",
     "canvas",
     "interactive",
-    "typescript"
+    "typescript",
+    "cdn",
+    "browser",
+    "bubbles",
+    "snow",
+    "confetti",
+    "sparkle"
   ],
   "main": "./dist/core/index.js",
   "module": "./dist/core/index.mjs",

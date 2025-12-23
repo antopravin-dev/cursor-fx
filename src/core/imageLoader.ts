@@ -50,6 +50,7 @@ export class ImageLoader {
 
   static async loadSnowflakes(basePath: string = '/snowflakes'): Promise<HTMLImageElement[]> {
     const snowflakePaths = [
+      // `${basePath}/snowflake.png`,
       `${basePath}/snow_flake_1.png`,
       `${basePath}/snow_flake_2.png`,
     ];

@@ -20,6 +20,9 @@ export class Particle {
   wobblePhase: number;
   windDrift: number;
   image?: HTMLImageElement;
+  scale: number;
+  initialScale: number;
+  scaleUpDuration: number;
 
   constructor(config: ParticleConfig) {
     this.x = config.x;
@@ -40,11 +43,24 @@ export class Particle {
     this.wobblePhase = Math.random() * Math.PI * 2; // Random starting phase
     this.windDrift = config.windDrift ?? 0;
     this.image = config.image;
+    this.initialScale = config.initialScale ?? 1; // Default to full scale
+    this.scaleUpDuration = config.scaleUpDuration ?? 0; // Default no animation
+    this.scale = this.initialScale; // Start at initial scale
   }
 
   update(): void {
     this.life++;
     this.vy += this.gravity;
+
+    // Animate scale from initialScale to 1.0 over scaleUpDuration frames
+    if (this.scaleUpDuration > 0 && this.life < this.scaleUpDuration) {
+      const progress = this.life / this.scaleUpDuration;
+      // Ease-out cubic for smooth pop-up effect
+      const easedProgress = 1 - Math.pow(1 - progress, 3);
+      this.scale = this.initialScale + (1 - this.initialScale) * easedProgress;
+    } else {
+      this.scale = 1;
+    }
 
     // Apply wobble (for bubbles)
     if (this.wobbleAmplitude > 0) {
@@ -58,7 +74,7 @@ export class Particle {
     if (this.windDrift > 0) {
       // Smooth Perlin-like drift using sine waves at different frequencies
       const drift = Math.sin(this.life * 0.05) * this.windDrift * 0.3 +
-                    Math.sin(this.life * 0.02) * this.windDrift * 0.7;
+        Math.sin(this.life * 0.02) * this.windDrift * 0.7;
       this.x += drift;
     }
 
@@ -75,17 +91,29 @@ export class Particle {
     ctx.save();
     ctx.globalAlpha = this.opacity;
 
+    // Apply scale transform (for pop-up animation)
+    ctx.translate(this.x, this.y);
+    ctx.scale(this.scale, this.scale);
+    ctx.translate(-this.x, -this.y);
+
     // If image is available, render image instead of shape
     if (this.image && this.image.complete) {
       // Enable high-quality image smoothing for better rendering
       ctx.imageSmoothingEnabled = true;
       ctx.imageSmoothingQuality = 'high';
 
-      const imgSize = this.size * 2.5; // Larger multiplier for bigger bubbles
+      const imgSize = this.size * 2.5; // Larger multiplier for bigger images
       ctx.translate(this.x, this.y);
       if (this.rotation !== 0) {
         ctx.rotate(this.rotation);
       }
+
+      // Add simple glow for snowflake images (single pass)
+      // if (this.shape === 'snowflake') {
+      //   ctx.shadowBlur = 8;
+      //   ctx.shadowColor = '#FFFFFF';
+      // }
+
       ctx.drawImage(
         this.image,
         -imgSize / 2,

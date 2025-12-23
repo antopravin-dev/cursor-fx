@@ -16,6 +16,8 @@ export interface ParticleConfig {
   wobbleSpeed?: number; // Wobble oscillation speed
   windDrift?: number; // Wind drift amount (for snowflakes)
   image?: HTMLImageElement; // Image to render (for image-based particles)
+  initialScale?: number; // Starting scale (for pop-up animation, 0-1)
+  scaleUpDuration?: number; // Frames to reach full scale
 }
 
 export interface EffectOptions {

@@ -36,7 +36,7 @@ export function createBubbleEffect(options: EffectOptions = {}): Effect {
 
         particles.push(
           new Particle({
-            x: x + (Math.random() - 0.5) * 20,
+            x: x + (Math.random() - 0.5) * 10, // Spawn closer to pointer
             y: y + (Math.random() - 0.5) * 10,
             vx: (Math.random() - 0.5) * velocity,
             vy: -Math.random() * 0.15 - 0.1, // Very slow, consistent upward
@@ -48,6 +48,8 @@ export function createBubbleEffect(options: EffectOptions = {}): Effect {
             wobbleAmplitude: 0.3, // Gentle horizontal wobble
             wobbleSpeed: 0.05, // Slow wobble oscillation
             image: bubbleImage || undefined, // Use image if loaded, fallback to canvas
+            initialScale: 0.3, // Start at 30% size for pop-up effect
+            scaleUpDuration: 15, // Grow to full size over 15 frames (~250ms)
           })
         );
       }

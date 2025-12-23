@@ -72,46 +72,19 @@ export function drawSnowflake(
   ctx.translate(x, y);
   ctx.rotate(rotation);
 
-  // Add subtle glow for depth
-  ctx.shadowBlur = 3;
-  ctx.shadowColor = ctx.strokeStyle as string;
+  // Optimized glow - reduced blur for better performance
+  ctx.shadowBlur = 4;
+  ctx.shadowColor = '#FFFFFF';
+  ctx.lineWidth = 1.8; // Slightly thicker for better visibility
 
-  // Draw main 6 arms
+  // Draw all 6 arms in a single path for better performance
+  ctx.beginPath();
   for (let i = 0; i < 6; i++) {
     const angle = (i * Math.PI) / 3;
-    const endX = Math.cos(angle) * size;
-    const endY = Math.sin(angle) * size;
-
-    // Main arm
-    ctx.beginPath();
     ctx.moveTo(0, 0);
-    ctx.lineTo(endX, endY);
-    ctx.stroke();
-
-    // Add small branches for detail
-    const branchSize = size * 0.3;
-    const branchDist = size * 0.6;
-    const branchX = Math.cos(angle) * branchDist;
-    const branchY = Math.sin(angle) * branchDist;
-
-    // Left branch
-    ctx.beginPath();
-    ctx.moveTo(branchX, branchY);
-    ctx.lineTo(
-      branchX + Math.cos(angle - Math.PI / 4) * branchSize,
-      branchY + Math.sin(angle - Math.PI / 4) * branchSize
-    );
-    ctx.stroke();
-
-    // Right branch
-    ctx.beginPath();
-    ctx.moveTo(branchX, branchY);
-    ctx.lineTo(
-      branchX + Math.cos(angle + Math.PI / 4) * branchSize,
-      branchY + Math.sin(angle + Math.PI / 4) * branchSize
-    );
-    ctx.stroke();
+    ctx.lineTo(Math.cos(angle) * size, Math.sin(angle) * size);
   }
+  ctx.stroke();
 
   ctx.restore();
 }

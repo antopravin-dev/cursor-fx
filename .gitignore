@@ -41,3 +41,7 @@ coverage/
 
 # npm pack artifacts
 *.tgz
+
+# Local reference documentation (not for repo)
+PUBLISHING.md
+NPM_2FA_SETUP.md
